@@ -3,14 +3,14 @@ package com.project.Band_Search;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("main")
 public class MainPageController {
-
-
-    @GetMapping("/")
-    public String main(Model model) {
-        model.addAttribute("title", "Main Page");
-        return "main_Page";
+    @GetMapping
+    public String mm() {
+        return "main";
     }
 }
