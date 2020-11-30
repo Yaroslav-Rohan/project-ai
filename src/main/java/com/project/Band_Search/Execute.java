@@ -1,6 +1,5 @@
 package com.project.Band_Search;
 
-import com.project.Band_Search.models.User;
 import com.project.Band_Search.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,13 +14,13 @@ public class Execute implements CommandLineRunner {
     }
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository userRep;
 
     @Override
     public void run(String... args) throws Exception {
-       // this.userRepository.deleteAllInBatch();
-      //  this.userRepository.save(new User( "Andriy", "01010", "mmm", "email@.com"));
-     //   this.userRepository.save(new User( "Asd", "FFF", "6456", "aad@.com"));
+       // this.userRep.deleteAllInBatch();
+      //  this.userRep.save(new User( "Andriy", "01010", "mmm", "email@.com"));
+     //   this.userRep.save(new User( "Asd", "FFF", "6456", "aad@.com"));
     }
 }
 
