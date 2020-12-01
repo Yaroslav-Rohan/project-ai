@@ -21,11 +21,10 @@ public class UsersController {
     private UserRepository userRep;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @GetMapping("/users")
     public List<User> users(Model model) {
         return (List<User>) this.userRep.findAll();
-        // model.addAttribute("usersInformation", usersInformation);
-        // return "users";
     }
 
  /*   @PostMapping("/login")
@@ -46,33 +45,10 @@ public class UsersController {
 
     @PostMapping("/registration")
     public User userPostAdd(@RequestBody User user) {
-        //  User user = null;
-  /*      if (//userName.length() == 0 ||
-                firstName.length() == 0 ||
-                        lastName.length() == 0 ||
-                        //login.length() == 0 ||
-                        password.length() == 0 ||
-                        email.length() == 0) {
-        //    model.addAttribute("check", "fill all text fields");
-            nt index = email.contains("@") ? email.indexOf("@") : email.length() - 5;
-            String emailSub = email.substring(index, email.length());
-           if (!email.contains("@") || !emailSub.contains(".")) {
-           user = new User(firstName, lastName, password, email);
-             }
-
-        //return "user-add";
-       /   }
-*/
-        System.out.println(user.getFirstName());
-        System.out.println(user.getLastName());
-        System.out.println(user.getEmail());
-        System.out.println(user.getPassword());
-        //  return userRep.save(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User userFromDb = userRep.findByEmail(user.getEmail());
+
         if (userFromDb != null) {
-            // return userRep.save(user);
-            //return userFromDb;
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT, "USER EXISTS");
         } else {
@@ -92,58 +68,4 @@ public class UsersController {
         model.addAttribute("user", user.get());
         return "user-details";
     }
-    //    @GetMapping("/user/{id}/edit")
-//    public String userIDEdit (@PathVariable(value = "id") Long id,
-//                                Model model)
-//    {
-//        if (!userRep.existsById(id))
-//            return "redirect:/users";
-//        Optional<User> user = userRep.findById(id);
-//        model.addAttribute("user", user.get());
-//        return "user-edit";
-//    }
-//    @PostMapping("/user/{id}/edit")
-//    public String userIDPostEdit(@PathVariable(value = "id") Long id,
-//                                 @RequestParam String userName,
-//                                 @RequestParam String firstName,
-//                                 @RequestParam String secondName,
-//                                 @RequestParam String login,
-//                                 @RequestParam String password,
-//                                 @RequestParam String email,
-//                                 Model model) {
-//
-//        if (userName.length() == 0 ||
-//                firstName.length() == 0 ||
-//                secondName.length() == 0 ||
-//                email.length() == 0){
-//            model.addAttribute("check", "fill all text fields");
-//            return "user-add";
-//        }
-//
-//
-//        int index = email.contains("@") ? email.indexOf("@") : email.length() - 5;
-//        String emailSub = email.substring(index, email.length());
-//        if (!email.contains("@") || !emailSub.contains(".")){
-//            model.addAttribute("check", "invalid email");
-//            return "user-add";
-//        }
-//
-//        User user = userRep.findByEmail(email);
-//
-//        if (user != null) {
-//            model.addAttribute("check", "user already exist");
-//            return "user-add";
-//        } else {
-//            User user1 = userRep.findById(id).orElseThrow();
-//            user1.setUserName(userName);
-//            user1.setFirstName(firstName);
-//            user1.setSecondName(secondName);
-//            user1.setLogin(login);
-//            user1.setPassword(password);
-//            user1.setEmail(email);
-//            userRep.save(user1);
-//            model.addAttribute("check", "");
-//            return "redirect:/users";
-//        }
-//    }
 }
