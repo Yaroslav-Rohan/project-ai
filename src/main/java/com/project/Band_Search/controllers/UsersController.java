@@ -22,11 +22,6 @@ public class UsersController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/users")
-    public List<User> users(Model model) {
-        return (List<User>) this.userRep.findAll();
-    }
-
  /*   @PostMapping("/login")
     public User userLogin(@RequestBody User user) {
         User userFromDb = userRep.findByEmail(user.getEmail());
@@ -41,7 +36,6 @@ public class UsersController {
         throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "NOT FOUND");
     }*/
-
 
     @PostMapping("/registration")
     public User userPostAdd(@RequestBody User user) {
