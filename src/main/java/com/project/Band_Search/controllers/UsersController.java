@@ -10,12 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class UsersController {
+
 
     @Autowired
     private UserRepository userRep;
@@ -62,4 +65,5 @@ public class UsersController {
         model.addAttribute("user", user.get());
         return "user-details";
     }
+
 }

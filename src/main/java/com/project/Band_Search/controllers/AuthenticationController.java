@@ -3,23 +3,29 @@ package com.project.Band_Search.controllers;
 import com.project.Band_Search.Jwt.JwtRequest;
 import com.project.Band_Search.Jwt.JwtResponse;
 import com.project.Band_Search.Jwt.JwtTokenUtil;
-import com.project.Band_Search.controllers.JwtUserDetailsService;
 import com.project.Band_Search.models.User;
+import com.project.Band_Search.service.JwtUserDetailsService;
+//import com.project.Band_Search.models.User;
+import com.project.Band_Search.repository.UserRepository;
+import com.project.Band_Search.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
+
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class AuthenticationController {
 
@@ -27,8 +33,11 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private UserServiceImpl userService;
+    @Autowired
     private JwtTokenUtil jwtTokenUtil;
-
+    @Autowired
+    private UserRepository userRep;
     @Autowired
     private JwtUserDetailsService userDetailsService;
     @Autowired
@@ -36,19 +45,29 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+        User userFromDb = userRep.findByEmail(authenticationRequest.getEmail());
+        if (userFromDb == null) {
+
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN, "WRONG USER");
+        }
+
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(),
                     authenticationRequest.getPassword()));
 
-        } catch (BadCredentialsException e) {//authenticationRequest.getPassword());
+        } catch (
+                BadCredentialsException e) {//authenticationRequest.getPassword());
             throw new Exception("Incorrect cred");
         }
-        System.out.println(authenticationRequest.getUsername() + "oaoaaoaa");
         final UserDetails userDetails =
-                userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+                userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new
+
+                JwtResponse(token));
+
     }
 
     private void authenticate(String username, String password) throws Exception {

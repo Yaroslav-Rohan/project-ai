@@ -1,4 +1,4 @@
-package com.project.Band_Search.controllers;
+package com.project.Band_Search.service;
 
 import com.project.Band_Search.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
