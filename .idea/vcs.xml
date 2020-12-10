@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/project-ai" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/main/webapp/Front-end" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/main/webapp/Front-end/Front-end" vcs="Git" />
   </component>
 </project>
