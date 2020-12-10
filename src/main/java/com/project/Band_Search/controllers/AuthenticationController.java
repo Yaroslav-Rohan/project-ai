@@ -1,12 +1,11 @@
 package com.project.Band_Search.controllers;
 
-import com.project.Band_Search.Jwt.JwtRequest;
 import com.project.Band_Search.Jwt.JwtResponse;
 import com.project.Band_Search.Jwt.JwtTokenUtil;
+import com.project.Band_Search.Requests.JwtRequest;
 import com.project.Band_Search.models.User;
-import com.project.Band_Search.service.JwtUserDetailsService;
-//import com.project.Band_Search.models.User;
 import com.project.Band_Search.repository.UserRepository;
+import com.project.Band_Search.service.JwtUserDetailsService;
 import com.project.Band_Search.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,13 +16,11 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -31,7 +28,6 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private UserServiceImpl userService;
     @Autowired

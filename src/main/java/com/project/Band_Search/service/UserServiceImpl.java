@@ -4,7 +4,6 @@ package com.project.Band_Search.service;
 //import com.project.Band_Search.models.PasswordResetToken;
 
 import com.project.Band_Search.models.User;
-import com.project.Band_Search.models.UserNotFoundException;
 import com.project.Band_Search.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,6 +35,7 @@ class UserServiceImpl implements IService<User> {
 
     public void updatePassword(User user, String newPassword) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
         String encodedPassword = passwordEncoder.encode(newPassword);
         user.setPassword(encodedPassword);
 

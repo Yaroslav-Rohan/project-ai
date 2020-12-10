@@ -10,10 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -24,21 +21,6 @@ public class UsersController {
     private UserRepository userRep;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
- /*   @PostMapping("/login")
-    public User userLogin(@RequestBody User user) {
-        User userFromDb = userRep.findByEmail(user.getEmail());
-        if (userFromDb != null) {
-            if (userFromDb.getPassword().equals(user.getPassword())) {
-                return userFromDb;
-            } else {
-                throw new ResponseStatusException(
-                        HttpStatus.FORBIDDEN, "WRONG PASSWORD");
-            }
-        }
-        throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "NOT FOUND");
-    }*/
 
     @PostMapping("/registration")
     public User userPostAdd(@RequestBody User user) {
@@ -65,5 +47,7 @@ public class UsersController {
         model.addAttribute("user", user.get());
         return "user-details";
     }
+
+
 
 }

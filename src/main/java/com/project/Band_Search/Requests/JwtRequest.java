@@ -1,4 +1,4 @@
-package com.project.Band_Search.Jwt;
+package com.project.Band_Search.Requests;
 
 import java.io.Serializable;
 
