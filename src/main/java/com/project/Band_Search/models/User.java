@@ -1,6 +1,7 @@
 package com.project.Band_Search.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -9,35 +10,28 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //  private String userName;
-    //  @Column(name = "first_name")
     private String firstName;
-    //   @Column(name = "last_name")
     private String lastName;
     private String password;
-    //  private String login;
     private String email;
+
+    @OneToMany(mappedBy="user")
+    private Set<Post> posts;
+
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
-
 
     public User() {
 
     }
 
-
-
-    public User(//String userName,
-                String firstName,
+    public User(String firstName,
                 String lastName,
                 String password,
-                //  String login,
                 String email) {
-        //this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        // this.login = login;
         this.email = email;
     }
 
@@ -48,14 +42,6 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-
-    //  public String getUserName() {
-    //     return userName;
-    // }
-
-    //  public void setUserName(String userName) {
-    //   this.userName = userName;
-    //  }
 
     public String getFirstName() {
         return firstName;
@@ -81,14 +67,6 @@ public class User {
         this.password = password;
     }
 
-    /*  public String getLogin() {
-          return login;
-      }
-
-      public void setLogin(String login) {
-          this.login = login;
-      }
-  */
     public String getEmail() {
         return email;
     }
@@ -103,4 +81,17 @@ public class User {
     public void setResetPasswordToken(String resetPasswordToken) {
         this.resetPasswordToken = resetPasswordToken;
     }
+
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
+    }
+
+    public void addPost(Post posts) {
+        this.posts.add(posts);
+    }
+
 }

@@ -42,7 +42,7 @@ public class ForgotPasswordController {
         // System.out.println(token + " TOOOOOOOKEN");
         try {
             userService.updateResetPasswordToken(token, email);
-            String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" + token;
+            String resetPasswordLink =  "http://localhost:3000/reset_password?token=" + token;
             sendEmail(email, resetPasswordLink);
         } catch (UnsupportedEncodingException | MessagingException e) {
 
@@ -56,7 +56,7 @@ public class ForgotPasswordController {
             throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setFrom("band_search@gmail.com", "BandSearch Support");
+        helper.setFrom("Vtakti@gmail.com", "Vtakti Support");
         helper.setTo(recipientEmail);
 
         String subject = "Here's the link to reset your password";

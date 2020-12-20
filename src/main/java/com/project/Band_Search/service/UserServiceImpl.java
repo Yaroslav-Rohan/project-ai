@@ -8,6 +8,7 @@ import com.project.Band_Search.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +25,11 @@ class UserServiceImpl implements IService<User> {
         return userRepository.findAll(pageable);
     }
 
-    @Override
+
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
 
     public User getByResetPasswordToken(String token) {
         return userRepository.findByResetPasswordToken(token);
@@ -43,7 +45,7 @@ class UserServiceImpl implements IService<User> {
         userRepository.save(user);
     }
 
-    public void updateResetPasswordToken(String token, String email)  {
+    public void updateResetPasswordToken(String token, String email) {
         User user = userRepository.findByEmail(email);
         if (user != null) {
             user.setResetPasswordToken(token);

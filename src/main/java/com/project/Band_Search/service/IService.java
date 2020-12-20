@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface IService<T> {
     Page<T> findAll(Pageable pageable);
-    void updatePassword(User user, String newPassword);
+    /*void updatePassword(User user, String newPassword);
     User getByResetPasswordToken(String token);
     void updateResetPasswordToken(String token, String email);
-    User findUserByEmail(String email);
+    User findUserByEmail(String email);*/
 }

@@ -47,7 +47,4 @@ public class UsersController {
         model.addAttribute("user", user.get());
         return "user-details";
     }
-
-
-
 }

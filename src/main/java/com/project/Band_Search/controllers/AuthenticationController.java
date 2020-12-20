@@ -60,7 +60,7 @@ public class AuthenticationController {
                 userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new
+        return ResponseEntity.ok().body(new
 
                 JwtResponse(token));
 
