@@ -1,2 +1,0 @@
-# project-ai
-Project AI
