@@ -37,12 +37,9 @@ public class ForgotPasswordController {
     public ResponseEntity<?> processForgotPassword(@RequestBody EmailRequest emailRequest, HttpServletRequest request, Model model) {
         String email = emailRequest.getEmail();
         String token = RandomString.make(30);
-        /**
-         * show resetPasswordToken in terminal*/
-        // System.out.println(token + " TOOOOOOOKEN");
         try {
             userService.updateResetPasswordToken(token, email);
-            String resetPasswordLink =  "http://localhost:3000/reset_password?token=" + token;
+            String resetPasswordLink = "http://localhost:3000/reset_password?token=" + token;
             sendEmail(email, resetPasswordLink);
         } catch (UnsupportedEncodingException | MessagingException e) {
 

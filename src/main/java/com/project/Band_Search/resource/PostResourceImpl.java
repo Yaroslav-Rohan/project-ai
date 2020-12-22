@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/main")
+@RequestMapping("/postList")
 @CrossOrigin(origins = "http://localhost:3000")
 
 

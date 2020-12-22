@@ -24,6 +24,7 @@ public class Post {
     @JoinColumn
     private User user;
 
+    private Long user_top_id;
     // Тупо єбані чекбокси
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -119,6 +120,14 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+        this.user_top_id = user.getId();
     }
 
+    public Long getUser_top_id() {
+        return user_top_id;
+    }
+
+    public void setUser_top_id(Long user_id) {
+        this.user_top_id = user_id;
+    }
 }

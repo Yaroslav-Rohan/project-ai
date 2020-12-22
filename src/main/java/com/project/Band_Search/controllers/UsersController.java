@@ -39,12 +39,10 @@ public class UsersController {
     }
 
     @GetMapping("/user/{id}")
-    public String userDetails(@PathVariable(value = "id") Long id,
-                              Model model) {
-        if (!userRep.existsById(id))
-            return "redirect:/users";
-        Optional<User> user = userRep.findById(id);
-        model.addAttribute("user", user.get());
-        return "user-details";
+    public Optional<User> userDetails(@PathVariable(value = "id") Long id,
+                                      Model model) {
+//        if (!userRep.existsById(id))
+//            return "redirect:/users";
+        return userRep.findById(id);
     }
 }
